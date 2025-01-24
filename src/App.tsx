@@ -62,9 +62,7 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
   const theme = useTheme();
-
   return (
     <SafeAreaView style={{backgroundColor:theme.colors.primary}}>
       <Button children={"INICIO"}></Button>
@@ -81,7 +79,7 @@ function App(): React.JSX.Element {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> hoal
+            Edit <Text style={theme.fonts.labelLarge}>App.tsx</Text> 
           </Section>
           <Section title="See Your Changes">
             <ReloadInstructions />
@@ -114,8 +112,11 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   highlight: {
-    fontWeight: '700',
+    fontWeight: '300',
+    fontFamily:'Roboto-Black'
   },
 });
 
 export default App;
+
+
