@@ -40,7 +40,13 @@ function HomeScreen() {
                 EJECUTAR ACCION
             </Button>
 
-        </View>
+             {/* Botón para navegar a Jugadores */}
+             <Button
+                onPress={() => navigation.navigate('PlayersScreen')}
+            >
+                Ir a Jugadores
+            </Button>
+    </View>
     );
 }
 
