@@ -10,56 +10,61 @@ import {
 import { Button, IconButton, TextInput } from 'react-native-paper';
 import { RootStackParamList } from '../types';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { Jugador } from '../interfaces/jugador';
 
 type PlayersScreenNavigationProp = StackNavigationProp<RootStackParamList, 'PlayersScreen'>;
 
 function PlayersScreen() {
     const navigation = useNavigation<PlayersScreenNavigationProp>();
-    const [numPlayers, setNumPlayers] = useState(0);  // Número de jugadores
-    const [players, setPlayers] = useState(0);       // Número de jugadores
+    const [jugadores, setJugadores] = useState<Jugador[]>([]);       
     const [currentName, setCurrentName] = useState(''); // Nombre del jugador actual
-    const [currentScore, setCurrentScore] = useState(0); // Puntaje actual del jugador
+    
+    
+    const crearJugador = () => {
+        if (currentName.trim() === '') {
+          Alert.alert('El nombre no puede estar vacío');
+          return;
+        }
+    
+        // Crear un nuevo jugador
+        const nuevoJugador: Jugador = {
+          nombre: currentName,
+          puntaje: 0, // Puntaje inicial
+          ranking: 0, // posicion inicial
+        };
+
+        setJugadores((prevJugadores) => [...prevJugadores, nuevoJugador]);
+
+        setCurrentName(''); // Limpiar el nombre temporal
+    }
 
     return (
         <View style={{}}>
-             <Text>{numPlayers}</Text>
-                        <Button mode='outlined' onPress={() => {
-                            if (numPlayers < 9) {
-                                setNumPlayers(numPlayers + 1)
-                            } else {
-                               Alert.alert("No se pueden agragar más jugadores")
-                            }
-                        }
-                        }>
-                            NÚMERO DE JUGADORES
-                        </Button>
+            
 
-            {/*<TextInput
-                label="Número de Jugadores"
-                value={numPlayers}
-                onChangeText={text => setNumPlayers(text)}
-            />*/}
-            <Text>Cantidad de Jugadores{numPlayers}</Text>
-
-            <Button
-                onPress={() => navigation.navigate('PlayersScreen')}
-            >
-                Confirmar
-            </Button>
-            <IconButton
-                icon={"camera"}
-                iconColor={"purple"}
-                size={20}
-                mode='outlined'
-                onPress={() => {
-                    if (numPlayers < 9) {
-                        setNumPlayers(numPlayers + 1)
-                    } else {
-                       Alert.alert("No se pueden agragar más jugadores")
-                    }
-                }
-                }
+            <TextInput
+                label="Nombre Jugador"
+                value={currentName}
+                onChangeText={text => setCurrentName(text)}
             />
+
+            <Button mode="contained" onPress={crearJugador}> 
+            Agregar Jugador
+            </Button>
+
+            <FlatList
+            data={jugadores}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+             <View>
+            <Text>Nombre: {item.nombre}</Text>
+            <Text>Puntaje: {item.puntaje}</Text>
+            <Text>Ranking: {item.ranking}</Text>
+          </View>
+        )}
+      />
+
+            
         </View>
 
     );
