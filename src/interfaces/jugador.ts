@@ -1,5 +1,5 @@
 export interface Jugador {
     nombre: string;
-    puntaje: number;
+    puntajePorRonda: number[];
     ranking: number;
 };
