@@ -5,69 +5,71 @@ import {
     Text,
     View,
 } from 'react-native';
-import { Button } from 'react-native-paper';
 import { RootStackParamList } from '../types';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { COLORS, panelStyles } from '../styles/styles';
+import CustomButton from '../components/CustomButton';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'HomeScreen'>;
 
 function HomeScreen() {
-    const navigation = useNavigation<HomeScreenNavigationProp>();
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
-    //A esto no le des mucha bola, se define de esta manera las variables que queres actualizar en tiempo real
-    // por ejemplo sumas o datos tomados de un input.
-    // Podes declarar la cantidad que quieras con distintos nombres y el parametro dentro de useState('parametro') puede ser un string
-    // un number u otros tipos de datos.
-    // para modificar el valor se hace atraves de la funcion setSumaTotal('parametro') donde el paremtro es el valor nuevo
-    const [sumaTotal, setSumaTotal] = useState(0);
+  return (
+    <View style={[panelStyles.container, styles.container]}>
+      <View style={styles.containerTitle}>
+        <Text style={styles.title}>CODICIA... TU NUEVO JUEGO FAVORITO</Text>
+      </View>
 
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>{sumaTotal}</Text>
-            <Button onPress={() => {
-                //Aca adentro le podes dar la funcionalidad al boton
-                //Puede realizar una accion ejecutando una funcion como en este caso la suma
-                //Tambien se pueden agregar condicionales para tomar distintas acciones
+      <View style={styles.containerButton}>
+        <CustomButton
+          title="Iniciar"
+          onPress={() => navigation.navigate("MenuScreen")}
+          mode="elevated"
+          disabled={false}
+        ></CustomButton>
 
-                if (sumaTotal < 9) {
-                    setSumaTotal(sumaTotal + 1)
-                } else {
-                    setSumaTotal(0)
-                    navigation.navigate('ReglasScreen')
-                }
-            }
-            }>
-                EJECUTAR ACCION
-            </Button>
+        <CustomButton
+          title="BOTON DESHABILITADO DE EJEMPLO"
+          onPress={() => navigation.navigate("PlayersScreen")}
+          mode={"contained"}
+          disabled={true}
+        ></CustomButton>
 
-             {/* Botón para navegar a Jugadores */}
-             <Button
-                onPress={() => navigation.navigate('PlayersScreen')}
-            >
-                Ir a Jugadores
-            </Button>
+        <CustomButton
+          title="IR A JUGADORES"
+          onPress={() => navigation.navigate("PlayersScreen")}
+          mode={"contained"}
+          disabled={false}
+        ></CustomButton>
+      </View>
     </View>
-    );
+  );
 }
 
 const styles = StyleSheet.create({
-    sectionContainer: {
-        marginTop: 32,
-        paddingHorizontal: 24,
+    container: {
+        backgroundColor: COLORS.violetaPrincipal
     },
-    sectionTitle: {
+    containerTitle: {
+        justifyContent: 'flex-start', // Alinea el titulo en la parte superior
+        marginTop: 20, // Margen superior
+        alignItems: 'center', // Centra el titulo horizontalmente
+        width: "80%"
+    },
+    title: {
         fontSize: 24,
         fontWeight: '600',
+        color: COLORS.blancoPrincipal
     },
-    sectionDescription: {
-        marginTop: 8,
-        fontSize: 18,
-        fontWeight: '400',
-    },
-    highlight: {
-        fontWeight: '300',
-        fontFamily: 'Roboto-Black'
-    },
+    containerButton: {
+        flex: 1, // Esto hace que los botones se ubiquen en la parte inferior
+        justifyContent: 'flex-end', // Alinea los botones en la parte inferior
+        alignItems: 'center', // Centra los botones horizontalmente
+        marginBottom: 20, //Margen inferior,
+        width: "80%",
+
+    }
 });
 
 export default HomeScreen;

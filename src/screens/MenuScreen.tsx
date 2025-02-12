@@ -7,18 +7,17 @@ import {
 } from 'react-native';
 import { RootStackParamList } from '../types';
 import { useNavigation } from '@react-navigation/native';
+import { panelStyles } from '../styles/styles';
 
 
-type ReglasScreenNavigationProp = StackNavigationProp<RootStackParamList, 'ReglasScreen'>;
+type ReglasScreenNavigationProp = StackNavigationProp<RootStackParamList, 'MenuScreen'>;
 
-function ReglasScreen() {
+function MenuScreen() {
     const navigtion = useNavigation<ReglasScreenNavigationProp>()
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Proba agregar botones. que sumen a distintos jugadores depende cual toques
-            Deberias hacer varias constantes como sumaTotal de HomeScreen y que los distintos botenes ejecuten la suma total del jugadores
-        </Text>
+      <View style={panelStyles.container}>
+        <Text>Agregar botones cuadrados de menu</Text>
       </View>
     );
   }
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ReglasScreen;
+export default MenuScreen;
 
 
 

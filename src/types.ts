@@ -1,7 +1,7 @@
 // types.ts
 export type RootStackParamList = {
     HomeScreen: undefined
-    ReglasScreen: undefined
+    MenuScreen: undefined
     PlayersScreen: undefined
   };
   
