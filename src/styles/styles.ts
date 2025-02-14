@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export const COLORS = {
-    violetaPrincipal: "#100329",
+    violetaPrincipal: "#0c0018",
     blancoPrincipal: "#FFFFFF",
-    violetaHabilitado: "#65558F",
-    violetaDeshabilitado: "#EADDFF"
+    violetaHabilitado: "#50036b",
+    violetaDeshabilitado: "#cba2fc"
 }
 
 export const panelStyles = StyleSheet.create({

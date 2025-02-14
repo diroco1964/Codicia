@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { Button, Text } from "react-native-paper";
+import { Button, Text, } from "react-native-paper";
 import { COLORS } from "../styles/styles";
 
 interface CustomButtonProps {
@@ -8,6 +8,8 @@ interface CustomButtonProps {
   title: string;
   mode: "contained" | "outlined" | "elevated"
   disabled: boolean
+  style?: object;
+  iconName?: string;
 }
 
 const CustomButton = (props: CustomButtonProps) => {
@@ -15,7 +17,7 @@ const CustomButton = (props: CustomButtonProps) => {
     <Button
       style={[
         styles.button,
-        props.disabled ? styles.deshabilitado : styles.habilitado,
+        props.disabled ? styles.deshabilitado : styles.habilitado,props.style,
       ]}
       mode={props.mode}
       onPress={() => props.onPress()}
@@ -44,7 +46,15 @@ const styles = StyleSheet.create({
         textAlign: "center",
         borderRadius: 20,
 
-    }
+    },
+    squareButton: {
+      width: 100, // Ancho fijo
+      height: 100, // Alto fijo
+      justifyContent: "center", // Alinea el contenido (texto e icono) al centro
+      alignItems: "center", // Centra el contenido
+      marginBottom: 10, // Espaciado entre los botones
+      borderRadius: 10, // Bordes redondeados (puedes poner 0 si quieres bordes rectos)
+    },
   });
 
 export default CustomButton;
