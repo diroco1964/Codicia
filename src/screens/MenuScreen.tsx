@@ -9,6 +9,7 @@ import { RootStackParamList } from '../types';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS,panelStyles } from '../styles/styles';
 import CustomButton from '../components/CustomButton';
+import Players from '../assets/icons/Players';
 
 
 type MenuScreenNavigationProp = StackNavigationProp<RootStackParamList, 'MenuScreen'>;
@@ -21,41 +22,38 @@ function MenuScreen() {
            
            <View style={styles.containerButton}>
         <CustomButton
-          title="REGLAS"
+          title="Reglas"
           onPress={() => navigation.navigate("HomeScreen")}
           mode="elevated"
           disabled={false}
           style={styles.squareButton}
-          iconName='camera'
         ></CustomButton>
 
         <CustomButton
-          title="GITHUB"
+          title="Github"
           onPress={() => navigation.navigate("HomeScreen")}
           mode="elevated"
           disabled={false}
           style={styles.squareButton}
-          iconName='camera'
         ></CustomButton>
       </View>
         
       <View style={styles.containerButton}>
         <CustomButton
-          title="JUGADORES"
+          title="Jugadores"
           onPress={() => navigation.navigate("PlayersScreen")}
           mode="elevated"
           disabled={false}
-          style={styles.squareButton}
-          iconName='camera'
-        />
+          icon={<Players/>}
+          square
+        /> 
 
         <CustomButton
-          title="ranking"
+          title="Ranking"
           onPress={() => navigation.navigate("HomeScreen")}
           mode="elevated"
           disabled={false}
           style={styles.squareButton}
-          iconName='camera'
         />
       </View>
 
@@ -89,13 +87,14 @@ function MenuScreen() {
 
     },
     squareButton: {
-        width: 70, // Ancho fijo para hacerlo cuadrado
-        height: 70, // Alto fijo para hacerlo cuadrado
+        width: 104, // Ancho fijo para hacerlo cuadrado
+        height: 104, // Alto fijo para hacerlo cuadrado
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 10, // Espaciado entre los botones
         borderRadius: 10, // Bordes redondeados, si quieres completamente cuadrado, puedes eliminarlo
         marginRight: 10, // Espaciado horizontal entre los botones (puedes ajustarlo para reducir el espacio)
+        backgroundColor: COLORS.violetaClaro
     },
 });
 

@@ -4,7 +4,8 @@ export const COLORS = {
     violetaPrincipal: "#0c0018",
     blancoPrincipal: "#FFFFFF",
     violetaHabilitado: "#50036b",
-    violetaDeshabilitado: "#cba2fc"
+    violetaDeshabilitado: "#cba2fc",
+    violetaClaro: "#EADDFF"
 }
 
 export const panelStyles = StyleSheet.create({
