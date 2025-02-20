@@ -10,6 +10,9 @@ import { useNavigation } from '@react-navigation/native';
 import { COLORS,panelStyles } from '../styles/styles';
 import CustomButton from '../components/CustomButton';
 import Players from '../assets/icons/Players';
+import Rules from '../assets/icons/Rules';
+import Github from '../assets/icons/Github';
+import Ranking from '../assets/icons/Ranking';
 
 
 type MenuScreenNavigationProp = StackNavigationProp<RootStackParamList, 'MenuScreen'>;
@@ -22,38 +25,41 @@ function MenuScreen() {
            
            <View style={styles.containerButton}>
         <CustomButton
+          title="Jugar"
+          onPress={() => navigation.navigate("PlayersScreen")}
+          mode="elevated"
+          disabled={false}
+          icon={<Players/>}
+          square
+        ></CustomButton>
+
+        <CustomButton
           title="Reglas"
           onPress={() => navigation.navigate("HomeScreen")}
           mode="elevated"
           disabled={false}
-          style={styles.squareButton}
+          icon={<Rules/>}
+          square
         ></CustomButton>
+      </View>
+        
+      <View style={styles.containerButton}>
+        <CustomButton
+          title="Ranking"
+          onPress={() => navigation.navigate("PlayersScreen")}
+          mode="elevated"
+          disabled={false}
+          icon={<Ranking/>}
+          square
+        /> 
 
         <CustomButton
           title="Github"
           onPress={() => navigation.navigate("HomeScreen")}
           mode="elevated"
           disabled={false}
-          style={styles.squareButton}
-        ></CustomButton>
-      </View>
-        
-      <View style={styles.containerButton}>
-        <CustomButton
-          title="Jugadores"
-          onPress={() => navigation.navigate("PlayersScreen")}
-          mode="elevated"
-          disabled={false}
-          icon={<Players/>}
+          icon={<Github/>}
           square
-        /> 
-
-        <CustomButton
-          title="Ranking"
-          onPress={() => navigation.navigate("HomeScreen")}
-          mode="elevated"
-          disabled={false}
-          style={styles.squareButton}
         />
       </View>
 
