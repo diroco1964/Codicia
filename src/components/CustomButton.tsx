@@ -10,6 +10,7 @@ interface CustomButtonProps {
   disabled: boolean;
   style?: object;
   square?: boolean;
+  circle?: boolean;
   icon?: any;
 }
 
@@ -18,14 +19,16 @@ const CustomButton = (props: CustomButtonProps) => {
     <Button
       style={[
         styles.button,
-        props.style ? props.style : 
-        props.square ? styles.squareButton : 
-        props.disabled ? styles.deshabilitado : styles.habilitado,
+        props.style ? props.style :
+          props.square ? styles.squareButton :
+          props.circle? styles.circleButton :
+            props.disabled ? styles.deshabilitado : styles.habilitado,
       ]}
       mode={props.mode}
       onPress={() => props.onPress()}
       disabled={props.disabled}
-      contentStyle={props.square ? styles.squareContent : undefined} // Ajustar contenido interno
+      
+      contentStyle={props.square ? styles.squareContent : props.circle? styles.circleContent : undefined} // Ajustar contenido interno
     >
       <View style={styles.innerContainer}>
         {props.icon}
@@ -63,18 +66,31 @@ const styles = StyleSheet.create({
     height: 104,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius:25,
+    borderRadius: 25,
     marginRight: 10,
     backgroundColor: COLORS.violetaClaro,
   },
   squareContent: {
-    height: 104, 
+    height: 104,
+    justifyContent: "center",
+  },
+  circleButton: {
+    width: 50,
+    height: 46,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10, // Esto asegura que sea completamente redondo.
+    backgroundColor: COLORS.violetaHabilitado,
+  },
+  
+  circleContent: {
+    height: 36,
     justifyContent: "center",
   },
   innerContainer: {
-    flexDirection: "column",
-    alignItems: "center",
+    flexDirection: "row",  // Ajuste a row si es necesario, para una distribución en línea
     justifyContent: "center",
+    alignItems: "center",  // Asegúrate de que el contenido esté centrado
   },
 });
 

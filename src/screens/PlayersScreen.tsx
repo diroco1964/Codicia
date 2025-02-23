@@ -8,12 +8,14 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
-import { Button, IconButton, TextInput } from "react-native-paper";
+import { Button, Divider, TextInput } from "react-native-paper";
 import { RootStackParamList } from "../types";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Jugador } from "../interfaces/jugador";
 import { COLORS, panelStyles } from "../styles/styles";
 import AddUser from "../assets/icons/AddUser";
+import CustomButton from "../components/CustomButton";
+import DeleteUser from "../assets/icons/DeleteUser";
 
 type PlayersScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -46,6 +48,13 @@ function PlayersScreen() {
     setJugadores((prevJugadores) => [...prevJugadores, nuevoJugador]);
 
     setCurrentName(""); // Limpiar el nombre temporal
+  };
+
+  // Eliminar Jugador 
+
+  const eliminarJugador = (e: { target: { getAttribute: (arg0: string) => any; }; }) => {
+    const nombre = e.target.getAttribute("nombre")
+    setJugadores(l => l.filter((item: Jugador) => item.nombre !== nombre));
   };
 
   // Sumar puntos a la casilla de la ronda
@@ -150,29 +159,61 @@ function PlayersScreen() {
           value={currentName}
           onChangeText={(text) => setCurrentName(text)}
         />
-        <Button
-          style={{
-            marginLeft: "5%",
-            width: "25%",
-            alignSelf: "center",
-            justifyContent: "center",
-            backgroundColor: COLORS.violetaHabilitado
-          }}
-          mode="contained"
-          onPress={crearJugador}
-          
-        >
-          
-          <AddUser/>
-        </Button>
+       <CustomButton
+            onPress={eliminarJugador}
+            title={""}
+            mode={"contained"}
+            disabled={false}
+            icon={<AddUser></AddUser>}
+            circle>
+          </CustomButton>
       </View>
 
-      <FlatList
+      <View
+        style={styles.containerList}
+      >
+
+        <View
+          style={styles.containerPlayer}
+        >
+          <Text
+            style={styles.textList}
+          >
+            Lemon
+          </Text>
+
+          <CustomButton
+            onPress={eliminarJugador}
+            title={""}
+            mode={"contained"}
+            disabled={false}
+            icon={<DeleteUser></DeleteUser>}
+            circle>
+          </CustomButton>
+          <Divider style={{backgroundColor: "red"}} />
+
+        </View>
+
+
+
+
+        <Text
+          style={styles.textList}
+        >
+          Mango</Text>
+        <Divider />
+
+
+
+      </View>
+
+
+      {/*  <FlatList
         data={jugadores}
         scrollEnabled={false}
         keyExtractor={(item, index) => index.toString()}
         renderItem={renderJugador}
-      />
+      /> */}
     </ScrollView>
   );
 }
@@ -191,6 +232,20 @@ const styles = StyleSheet.create({
     justifyContent: "space-between", // Espacio entre el input y el botón
     alignItems: "center", // Alinea el input y el botón verticalmente
     marginTop: 20,
+    marginBottom: 20
+  },
+  containerList: {
+    width: "80%", // Hace que el contenedor del input ocupe todo el ancho
+    flexDirection: "column", // Alineación horizontal de los elementos dentro del contenedor
+    justifyContent: "space-between", // Espacio entre el input y el botón
+    marginTop: 20,
+  },
+  textList: {
+    fontSize: 16,
+    fontWeight: "heavy",
+    marginVertical: 20,
+    width: "100%",
+    alignSelf: "flex-start"
   },
   title: {
     fontSize: 24,
@@ -201,7 +256,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: "gray",
     borderWidth: 1,
-    marginBottom: 10,
+    marginBottom: 20,
     paddingLeft: 8,
   },
   button: {
